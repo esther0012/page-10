@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consórcio Canopus — Mais Contemplações Por Assembleia</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --preto:#05080a; --azul-esc:#071420; --azul:#0c1f30; --azul-med:#122a40;
+    --ouro:#c9a84c; --ouro-claro:#e8c96e; --branco:#f0eeea; --cinza:#7a7871;
+    --verde-acc:#1a6645;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--preto);color:var(--branco);}
+
+  /* NAV */
+  nav{padding:20px 60px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.04);}
+  .logo{display:flex;flex-direction:column;gap:2px;}
+  .logo-name{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:800;color:var(--branco);letter-spacing:-0.5px;}
+  .logo-sub{font-size:11px;color:var(--cinza);letter-spacing:1px;text-transform:uppercase;}
+  .nav-badge{display:flex;align-items:center;gap:8px;background:rgba(26,102,69,.15);border:1px solid rgba(26,102,69,.4);color:#4ecb8b;font-size:12px;font-weight:600;padding:7px 14px;border-radius:3px;}
+  .nav-badge::before{content:'';width:7px;height:7px;background:#4ecb8b;border-radius:50%;}
+  .btn-n{background:var(--ouro);color:var(--preto);font-size:13px;font-weight:700;padding:10px 22px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;border-radius:2px;}
+  .btn-n:hover{background:var(--ouro-claro);}
+
+  /* HERO — SPEED/WIN ANGLE */
+  .hero{background:var(--azul-esc);padding:90px 60px;display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center;border-bottom:1px solid rgba(255,255,255,.04);}
+  .h-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--ouro);font-weight:600;margin-bottom:28px;}
+  h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(38px,5vw,62px);font-weight:800;line-height:1.05;color:var(--branco);margin-bottom:24px;letter-spacing:-1px;}
+  h1 .accent{color:var(--ouro-claro);}
+  .h-desc{font-size:17px;font-weight:300;color:rgba(240,238,234,.62);line-height:1.7;margin-bottom:44px;max-width:460px;}
+  .h-desc strong{color:var(--branco);font-weight:500;}
+  .btn-h{display:inline-block;background:var(--ouro);color:var(--preto);font-size:15px;font-weight:700;padding:17px 38px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;border-radius:2px;}
+  .btn-h:hover{background:var(--ouro-claro);}
+
+  /* HERO RIGHT — WIN ODDS */
+  .odds-card{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.18);border-radius:4px;padding:36px;}
+  .odds-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--cinza);margin-bottom:20px;font-weight:500;}
+  .odds-comparison{display:flex;flex-direction:column;gap:16px;}
+  .odds-item{display:flex;flex-direction:column;gap:8px;}
+  .odds-item-header{display:flex;justify-content:space-between;align-items:center;}
+  .odds-item-name{font-size:13px;color:rgba(240,238,234,.6);}
+  .odds-item-name.highlight{color:var(--branco);font-weight:600;}
+  .odds-item-pct{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;}
+  .odds-item-pct.highlight{color:var(--ouro-claro);}
+  .odds-bar-bg{width:100%;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
+  .odds-bar{height:100%;border-radius:4px;background:rgba(255,255,255,.15);}
+  .odds-bar.highlight{background:linear-gradient(90deg,var(--ouro),var(--ouro-claro));}
+  .odds-note{font-size:12px;color:var(--cinza);margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05);line-height:1.6;}
+
+  /* EXPLAINER */
+  .explain{padding:90px 60px;}
+  .explain-inner{max-width:820px;margin:0 auto;}
+  .s-label{font-size:11px;text-transform:uppercase;letter-spacing:2.5px;color:var(--ouro);font-weight:600;margin-bottom:20px;}
+  h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:800;color:var(--branco);line-height:1.1;letter-spacing:-0.5px;margin-bottom:48px;}
+  h2 .accent{color:var(--ouro-claro);}
+  .explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .e-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:4px;padding:28px;}
+  .e-card.featured{background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.2);}
+  .e-num{font-family:'Bricolage Grotesque',sans-serif;font-size:36px;font-weight:800;color:rgba(201,168,76,.2);line-height:1;margin-bottom:14px;}
+  .e-card.featured .e-num{color:rgba(201,168,76,.45);}
+  .e-card h3{font-size:16px;font-weight:600;color:var(--branco);margin-bottom:10px;}
+  .e-card p{font-size:13px;color:var(--cinza);line-height:1.7;}
+  .e-card .badge{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);color:var(--ouro-claro);font-size:11px;padding:4px 10px;border-radius:20px;margin-top:10px;}
+
+  /* CANOPUS DIFFERENTIALS */
+  .diff{background:var(--azul-med);padding:80px 60px;}
+  .diff-inner{max-width:900px;margin:0 auto;}
+  .diff-3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;background:rgba(201,168,76,.06);}
+  .diff-item{background:var(--azul-med);padding:36px 28px;}
+  .di-icon{font-size:28px;margin-bottom:16px;}
+  .diff-item h3{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;color:var(--branco);margin-bottom:10px;line-height:1.3;}
+  .diff-item p{font-size:13px;color:var(--cinza);line-height:1.65;}
+  .diff-item .big{font-family:'Bricolage Grotesque',sans-serif;font-size:40px;font-weight:800;color:var(--ouro-claro);line-height:1;margin-bottom:8px;}
+
+  /* FORM */
+  .form-s{padding:90px 60px;}
+  .form-s-inner{max-width:580px;margin:0 auto;}
+  .form-s-inner p{font-size:17px;color:rgba(240,238,234,.6);line-height:1.65;margin:14px 0 44px;}
+  .form{display:flex;flex-direction:column;gap:14px;}
+  .fi{background:rgba(255,255,255,.03);border:1px solid rgba(201,168,76,.15);color:var(--branco);font-size:15px;padding:14px 18px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;width:100%;border-radius:2px;}
+  .fi:focus{border-color:var(--ouro);}
+  .fi option{background:var(--azul);}
+  .btn-f{background:var(--ouro);color:var(--preto);font-size:16px;font-weight:700;padding:19px;width:100%;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;margin-top:8px;border-radius:2px;}
+  .btn-f:hover{background:var(--ouro-claro);}
+  .form-disc{font-size:12px;color:var(--cinza);text-align:center;margin-top:12px;}
+
+  .phone-wrap { width:100%; }
+
+  #telefone-status {
+    font-size:12px;
+    margin-top:6px;
+  }
+
+  /* intl tel */
+  .iti { width:100%; }
+
+  .iti input {
+    width:100%;
+    padding:14px 18px 14px 90px !important;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(201,168,76,.15);
+    color:var(--branco);
+    border-radius:2px;
+  }
+
+  .iti__selected-flag {
+    border-right:1px solid rgba(201,168,76,.12);
+  }
+
+  .iti__country-list {
+    background:var(--azul-med);
+    border:1px solid rgba(201,168,76,.2);
+  }
+
+  .iti__country:hover {
+    background:rgba(201,168,76,.1);
+  }
+
+  footer{border-top:1px solid rgba(255,255,255,.04);padding:28px 60px;display:flex;justify-content:space-between;font-size:12px;color:var(--cinza);}
+
+  @media(max-width:768px){
+    nav{padding:20px 24px;}
+    .nav-badge{display:none;}
+    .hero{grid-template-columns:1fr;padding:60px 24px;}
+    .explain,.diff,.form-s{padding:60px 24px;}
+    .explain-grid{grid-template-columns:1fr;}
+    .diff-3{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:10px;padding:24px;}
+  }
+</style>
+
+
+
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '1761905857999115');
+    fbq('init', '837741104784878');
+    fbq('track', 'PageView');
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css"/>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-name">Consórcio Canopus</div>
+    <div class="logo-sub">Via Referência Capital</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <div class="nav-badge">Maior contemplação por assembleia</div>
+    <button class="btn-n" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Agendar reunião</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="h-eyebrow">Consórcio imobiliário inteligente</div>
+    <h1>Sem juros.<br>Sem entrada.<br><span class="accent">Mais chances</span><br>de contemplação.</h1>
+    <p class="h-desc">O Consórcio Canopus tem o <strong>maior número de contemplações por assembleia</strong> do mercado. Para quem mora no exterior, isso significa uma estratégia ainda mais poderosa.</p>
+    <button class="btn-h" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Quero entender as vantagens →</button>
+  </div>
+  <div>
+    <div class="odds-card">
+      <div class="odds-label">Comparativo de contemplação por assembleia</div>
+      <div class="odds-comparison">
+        <div class="odds-item">
+          <div class="odds-item-header">
+            <span class="odds-item-name highlight">Canopus</span>
+            <span class="odds-item-pct highlight">Líder de mercado</span>
+          </div>
+          <div class="odds-bar-bg"><div class="odds-bar highlight" style="width:92%"></div></div>
+        </div>
+        <div class="odds-item">
+          <div class="odds-item-header">
+            <span class="odds-item-name">Média do mercado</span>
+            <span class="odds-item-pct" style="color:var(--cinza)">Base</span>
+          </div>
+          <div class="odds-bar-bg"><div class="odds-bar" style="width:48%"></div></div>
+        </div>
+      </div>
+      <p class="odds-note">O Consórcio Canopus é reconhecido por ter o maior número de contemplações por assembleia do mercado — ou seja, suas chances são maiores do que em qualquer outra administradora.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLAINER -->
+<section class="explain">
+  <div class="explain-inner">
+    <div class="s-label">Como funciona o consórcio</div>
+    <h2>Mais simples do que<br><span class="accent">parece</span></h2>
+    <div class="explain-grid">
+      <div class="e-card">
+        <div class="e-num">01</div>
+        <h3>Um grupo com o mesmo objetivo</h3>
+        <p>Pessoas que querem comprar imóvel se juntam. Cada uma paga uma parcela mensal acordada, sem juros.</p>
+      </div>
+      <div class="e-card featured">
+        <div class="e-num">02</div>
+        <h3>Contemplação: você recebe o crédito inteiro</h3>
+        <p>Todo mês, contemplados recebem o valor integral da carta para comprar o imóvel — antes de terminar de pagar.</p>
+        <span class="badge">Pode acontecer logo no 1º mês</span>
+      </div>
+      <div class="e-card">
+        <div class="e-num">03</div>
+        <h3>Lance: você acelera a contemplação</h3>
+        <p>Antecipando parte do que falta pagar, você aumenta suas chances de ser contemplado mais rápido.</p>
+      </div>
+      <div class="e-card featured">
+        <div class="e-num">04</div>
+        <h3>Do exterior, tudo à distância</h3>
+        <p>Mesmo que você esteja morando do outro lado do mundo, o processo acontece completamente online.</p>
+        <span class="badge">Sem precisar vir ao Brasil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CANOPUS DIFFERENTIALS -->
+<section class="diff">
+  <div class="diff-inner">
+    <div class="s-label">Por que Canopus + Referência Capital</div>
+    <h2>A combinação que<br>acelera o seu plano</h2>
+    <div class="diff-3">
+      <div class="diff-item">
+        <div class="big">#1</div>
+        <h3>Maior contemplação por assembleia do mercado</h3>
+        <p>Reconhecimento formal de ser a administradora com mais contemplações mensais — suas chances de receber o crédito rápido são as maiores disponíveis.</p>
+      </div>
+      <div class="diff-item">
+        <div class="big">4k+</div>
+        <h3>Parceiros espalhados pelo Brasil inteiro</h3>
+        <p>Mais de 4.000 parceiros em todo o Brasil. E, especificamente, a Referência Capital é especialista em atender brasileiros no exterior de ponta a ponta.</p>
+      </div>
+      <div class="diff-item">
+        <div class="big">360°</div>
+        <h3>Da carta ao imóvel gerando renda</h3>
+        <p>Com a Referência Capital, você não só consegue o crédito Canopus — você recebe também a escolha do imóvel ideal e a gestão completa de locação.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-s" id="form">
+  <div class="form-s-inner">
+    <div class="s-label" style="text-align:center">Fale com um especialista</div>
+    <h2 style="text-align:center">Descubra como o Canopus<br>funciona para você</h2>
+    <p style="text-align:center">Um especialista da Referência Capital vai explicar as vantagens do Consórcio Canopus para quem mora no exterior e montar uma simulação personalizada.</p>
+    <form id="leadForm" class="form">
+
+      <input class="fi" type="text" name="nome" placeholder="Seu nome completo" required>
+
+      <div class="phone-wrap">
+        <input id="telefone" class="fi" type="tel" name="telefone" placeholder="WhatsApp com DDI" required>
+        <div id="telefone-status" style="font-size:13px;margin-top:5px;"></div>
+      </div>
+
+      <input class="fi" type="email" name="email" placeholder="Seu e-mail" required>
+
+      <select class="fi" name="capacidadeInvestimento" required>
+        <option value="">Valor de carta desejado (R$)</option>
+        <option>R$200k a R$400k</option>
+        <option>R$400k a R$600k</option>
+        <option>R$600k a R$1M</option>
+        <option>Acima de R$1M</option>
+        <option>Ainda não sei</option>
+      </select>
+
+      <button type="submit" id="submitBtn" class="btn-f" disabled>
+        Quero simulação com o Consórcio Canopus →
+      </button>
+
+      <p class="form-disc">Gratuito · Sem compromisso · Atendimento por WhatsApp ou videochamada</p>
+
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Referência Capital · Parceiro Oficial Consórcio Canopus</span>
+  <span>Privacidade · Termos</span>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
+<script>
+  const WEBHOOK_URL = "https://nitro-app.referenciacapital.tech/webhook/leadsLP";
+  const VALIDAR_WHATSAPP_URL = "https://nitro-app.referenciacapital.tech/webhook/validarWhatsApp";
+  const API_KEY = "n8n.uA5GXxCvJrsexY$et9PyrScGy-nitro";
+
+  const telefoneInput = document.querySelector("#telefone");
+  const status = document.getElementById("telefone-status");
+  const submitBtn = document.getElementById("submitBtn");
+  const form = document.getElementById("leadForm");
+
+  const iti = window.intlTelInput(telefoneInput, {
+    initialCountry: "br",
+    separateDialCode: true,
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
+  });
+
+  let telefoneValido = false;
+  let timeout;
+
+  function setStatus(msg,color){
+    status.innerText = msg;
+    status.style.color = color;
+  }
+
+  async function validar(){
+    const numero = iti.getNumber().replace(/\D/g,'');
+
+    telefoneValido = false;
+    submitBtn.disabled = true;
+
+    if(!numero || numero.length < 10){
+      setStatus("Número incorreto","red");
+      return;
+    }
+
+    setStatus("Validando...","#c9a84c");
+
+    try{
+      const res = await fetch(`${VALIDAR_WHATSAPP_URL}?telefone=${numero}`,{
+        headers:{ "api-key": API_KEY }
+      });
+
+      const data = await res.json();
+      const ok = data.existe === "true" || data.existe === true;
+
+      if(ok){
+        telefoneValido = true;
+        submitBtn.disabled = false;
+        setStatus("Número validado","green");
+      } else {
+        setStatus("Número incorreto","red");
+      }
+
+    }catch(e){
+      setStatus("Número incorreto","red");
+    }
+  }
+
+  telefoneInput.addEventListener("input",()=>{
+    telefoneValido = false;
+    submitBtn.disabled = true;
+    setStatus("Digitando...","#aaa");
+
+    clearTimeout(timeout);
+    timeout = setTimeout(validar,800);
+  });
+
+  telefoneInput.addEventListener("blur",validar);
+
+  form.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+
+    if(!telefoneValido){
+      setStatus("Número incorreto","red");
+      return;
+    }
+
+    const data = new FormData(form);
+
+    const payload = {
+      nome: data.get("nome"),
+      email: data.get("email"),
+      telefone: iti.getNumber().replace(/\D/g,''),
+      capacidadeInvestimento: data.get("capacidadeInvestimento"),
+      utmSource: window.location.href,
+      produto: "80/20"
+    };
+
+    try{
+      await fetch(WEBHOOK_URL,{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "api-key": API_KEY
+        },
+        body: JSON.stringify(payload)
+      });
+
+      window.location.href = "https://referenciacapital.com.br/investimento-estrangeiros-obrigado/";
+
+    }catch(e){
+      alert("Erro ao enviar");
+    }
+  });
+</script>
+</body>
+</html>
